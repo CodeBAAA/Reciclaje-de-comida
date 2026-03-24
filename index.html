@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cocina de Aprovechamiento</title>
+  <meta name="description" content="Aprende a ahorrar dinero, aprovechar mejor tus alimentos y reducir el desperdicio con asesorías, recetas y productos prácticos." />
+  <style>
+    :root {
+      --bg: #fffaf5;
+      --bg-soft: #fff3e8;
+      --card: #ffffff;
+      --text: #2b2118;
+      --muted: #6d5c4f;
+      --primary: #c94f2d;
+      --primary-dark: #a63c1f;
+      --accent: #f4b183;
+      --border: #f0dccb;
+      --shadow: 0 10px 30px rgba(80, 48, 29, 0.08);
+      --radius: 22px;
+      --max: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #fffaf5 0%, #fff7f0 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 250, 245, 0.88);
+      border-bottom: 1px solid rgba(201, 79, 45, 0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.2px;
+      color: var(--primary-dark);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 999px;
+      padding: 0.95rem 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+    }
+
+    .hero {
+      padding: 4.5rem 0 3.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: #ffe2d6;
+      color: var(--primary-dark);
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 640px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .hero-points div {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 18px;
+      color: var(--muted);
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, #fff 0%, #fff1e4 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: rgba(201, 79, 45, 0.09);
+      border-radius: 50%;
+      top: -50px;
+      right: -50px;
+    }
+
+    .hero-image {
+      height: 420px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(244,177,131,0.55), rgba(201,79,45,0.22)),
+                  url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80') center/cover;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(201,79,45,0.1);
+    }
+
+    .floating-note {
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+      background: rgba(255,255,255,0.95);
+      padding: 0.9rem 1rem;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      max-width: 260px;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 2.3rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      border-radius: 16px;
+      background: #ffe6dc;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.7rem;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .card ul {
+      padding-left: 1rem;
+      color: var(--muted);
+    }
+
+    .card li + li {
+      margin-top: 0.45rem;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .about-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .about-box p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .stat {
+      background: var(--bg-soft);
+      border-radius: 20px;
+      padding: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .recipe-preview {
+      min-height: 360px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(201,79,45,0.15), rgba(244,177,131,0.25)),
+                  url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80') center/cover;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .products {
+      background: linear-gradient(180deg, rgba(255,243,232,0.55), rgba(255,250,245,0));
+    }
+
+    .product-card {
+      padding: 1.25rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.35rem 0.7rem;
+      background: #fff0e8;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+      color: var(--primary-dark);
+    }
+
+    .cta {
+      padding-bottom: 5rem;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      border-radius: 32px;
+      padding: 2.4rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box p {
+      max-width: 680px;
+      opacity: 0.94;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .about,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+
+      .hero-image {
+        height: 320px;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="brand">Cocina de Aprovechamiento</a>
+      <nav class="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#productos">Productos</a>
+        <a href="#contacto" class="btn btn-primary">Contáctanos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Ahorra más. Desperdicia menos.</span>
+          <h1>Transformamos lo que tienes en casa en comidas útiles, ricas y económicas.</h1>
+          <p>
+            Somos una propuesta enfocada en la cocina de aprovechamiento: ayudarte a usar mejor tus alimentos,
+            reducir el desperdicio y cuidar tu bolsillo con soluciones prácticas, recetas claras y acompañamiento real.
+          </p>
+          <div class="hero-actions">
+            <a href="#servicios" class="btn btn-primary">Ver lo que ofrecemos</a>
+            <a href="#nosotros" class="btn btn-secondary">Conocer más</a>
+          </div>
+          <div class="hero-points">
+            <div>Menos comida desperdiciada</div>
+            <div>Más orden en tu cocina</div>
+            <div>Más ahorro semanal</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-image">
+            <div class="floating-note">Ideas sencillas para que tus ingredientes rindan más y tu presupuesto también.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <h2>Lo que ofrecemos</h2>
+          <p>
+            A partir de tu idea, profundicé la propuesta para que el sitio no solo diga qué hacen,
+            sino también por qué eso importa y cómo ayuda de verdad a las personas.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">🍲</div>
+            <h3>Asesoramientos</h3>
+            <p>
+              Te guiamos para organizar mejor tu cocina, comprar con intención y aprovechar ingredientes antes de que se dañen.
+            </p>
+            <ul>
+              <li>Planificación básica de comidas</li>
+              <li>Consejos para conservar mejor los alimentos</li>
+              <li>Ideas para comprar sin gastar de más</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon">📖</div>
+            <h3>Recetas</h3>
+            <p>
+              Recetas prácticas pensadas para reutilizar sobras, combinar ingredientes comunes y crear platos con más valor.
+            </p>
+            <ul>
+              <li>Opciones fáciles para el día a día</li>
+              <li>Recetas con ingredientes que ya tienes</li>
+              <li>Preparaciones para rendir mejor el presupuesto</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon">🛍️</div>
+            <h3>Productos</h3>
+            <p>
+              Seleccionamos algunos productos útiles para conservar, organizar y facilitar el aprovechamiento de alimentos.
+            </p>
+            <ul>
+              <li>Accesorios prácticos para cocina</li>
+              <li>Soluciones de organización</li>
+              <li>Herramientas para reducir desperdicios</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros">
+      <div class="container about">
+        <div class="about-box">
+          <div class="section-head" style="text-align:left; margin:0 0 1rem 0;">
+            <h2>¿Qué es la cocina de aprovechamiento?</h2>
+          </div>
+          <p>
+            Es una forma inteligente de cocinar usando al máximo lo que ya tienes disponible. No se trata solo de ahorrar,
+            sino de cambiar la manera en la que vemos la comida: cada ingrediente puede rendir más si se planifica, se conserva bien y se usa con creatividad.
+          </p>
+          <p>
+            Esta propuesta conecta con personas y familias que quieren comer mejor, gastar menos y dejar de perder alimentos por falta de ideas, orden o tiempo.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat">
+              <strong>Más ahorro</strong>
+              <span>Mejor uso del presupuesto semanal y mensual.</span>
+            </div>
+            <div class="stat">
+              <strong>Menos desperdicio</strong>
+              <span>Menos alimentos que terminan en la basura.</span>
+            </div>
+            <div class="stat">
+              <strong>Más orden</strong>
+              <span>Compras, conservación y preparación con intención.</span>
+            </div>
+            <div class="stat">
+              <strong>Más valor</strong>
+              <span>Ideas que convierten ingredientes simples en soluciones reales.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="recipe-preview" aria-label="Vista ilustrativa de cocina de aprovechamiento"></div>
+      </div>
+    </section>
+
+    <section class="products" id="productos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Productos destacados</h2>
+          <p>
+            Esta sección puede crecer luego con tienda, catálogo o enlaces de compra. Por ahora, te dejo una presentación elegante y funcional.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card product-card">
+            <span class="tag">Organización</span>
+            <h3>Contenedores reutilizables</h3>
+            <p>
+              Ideales para guardar porciones, separar ingredientes y extender la vida útil de comidas preparadas.
+            </p>
+          </article>
+
+          <article class="card product-card">
+            <span class="tag">Conservación</span>
+            <h3>Bolsas y frascos herméticos</h3>
+            <p>
+              Ayudan a mantener mejor los alimentos y a tener una cocina más ordenada y funcional.
+            </p>
+          </article>
+
+          <article class="card product-card">
+            <span class="tag">Practicidad</span>
+            <h3>Guías y kits útiles</h3>
+            <p>
+              Recursos simples para planificar comidas, reutilizar sobras y comprar con más estrategia.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contacto">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Haz que tu cocina trabaje mejor para ti</h2>
+            <p>
+              Podemos ayudarte a convertir una idea sencilla en una propuesta útil, cercana y con impacto: menos desperdicio, más ahorro y mejores hábitos en la cocina.
+            </p>
+          </div>
+          <a href="mailto:contacto@cocinadeaprovechamiento.com" class="btn btn-secondary">Escríbenos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Cocina de Aprovechamiento. Sitio web enfocado en asesorías, recetas y productos para ahorrar y aprovechar mejor los alimentos.
+    </div>
+  </footer>
+</body>
+</html>
